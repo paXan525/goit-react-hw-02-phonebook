@@ -23,3 +23,10 @@ export const SubTitle = styled.h2`
   text-align: center;
   text-transform: uppercase;
 `;
+
+export const Notification = styled.p`
+  font-weight: 500;
+  font-size: 26px;
+  text-align: center;
+  color: #0e28f7;
+`;

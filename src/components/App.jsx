@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid';
 import ContactForm from './contactForm';
 import ContactList from './contactList';
 import Filter from './filter';
-import { Container, Title, SubTitle } from './App.styled';
+import { Container, Title, SubTitle, Notification } from './App.styled';
 
 class App extends Component {
   state = {
@@ -57,6 +57,7 @@ class App extends Component {
 
   render() {
     const { filter } = this.state;
+    const { length } = this.state.contacts;
     const visibleContacts = this.getVisibleContacts();
 
     return (
@@ -64,15 +65,21 @@ class App extends Component {
         <Title>Phonebook</Title>
         <ContactForm onSubmit={this.addContact} />
         <SubTitle>Contacts</SubTitle>
-        <Filter
-          value={filter}
-          onChange={this.changeFilter}
-          name={this.state.contacts.name}
-        />
-        <ContactList
-          contacts={visibleContacts}
-          onDeleteContact={this.deleteContact}
-        />
+        {length !== 0 ? (
+          <div>
+            <Filter
+              value={filter}
+              onChange={this.changeFilter}
+              name={this.state.contacts.name}
+            />
+            <ContactList
+              contacts={visibleContacts}
+              onDeleteContact={this.deleteContact}
+            />
+          </div>
+        ) : (
+          <Notification>The contact list is empty!</Notification>
+        )}
       </Container>
     );
   }
